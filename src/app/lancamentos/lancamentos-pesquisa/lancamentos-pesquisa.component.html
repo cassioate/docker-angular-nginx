@@ -1,42 +1,44 @@
 <div class="container">
   <div class="p-grid">
 
-    <div class="p-col-12">
-      <h1>Lançamentos</h1>
-    </div>
+    <form autocomplete="off" (ngSubmit)="pesquisar()">
 
-    <div class="p-col-12 p-fluid">
-      <label>Descrição</label>
-      <input pInputText type="text">
-    </div>
+      <div class="p-col-12">
+        <h1>Lançamentos</h1>
+      </div>
 
-    <div class="p-col-12">
-      <label style="display: block">Vencimento</label>
-      <input pInputText type="text" style="width: 95px">
+      <div class="p-col-12 p-fluid">
+        <label>Descrição</label>
+        <input pInputText type="text" name="descricao"
+          [(ngModel)]="filtro.descricao">
+      </div>
 
-      <label>até</label>
-      <input pInputText type="text" style="width: 95px">
-    </div>
+      <div class="p-col-12">
+        <label style="display: block">Vencimento</label>
+        <p-calendar dateFormat="dd/mm/yy" [inputStyle]="{ width: '95px' }"
+          name="vencimentoInicio" [(ngModel)]="filtro.dataVencimentoInicio"></p-calendar>
 
-    <div class="p-col-12">
-      <button pButton type="submit" label="Pesquisar"></button>
-    </div>
+        <label>até</label>
+        <p-calendar dateFormat="dd/mm/yy" [inputStyle]="{ width: '95px' }"
+          name="vencimentoFim" [(ngModel)]="filtro.dataVencimentoFim"></p-calendar>
+      </div>
 
+      <div class="p-col-12">
+        <button pButton type="submit" label="Pesquisar"></button>
+      </div>
+
+    </form>
   </div>
 
   <div class="p-grid">
     <div class="p-col-12">
-      <app-lancamentos-grid [lancamentos]="lancamentos"></app-lancamentos-grid>
+      <app-lancamento-grid [filtro]="filtro" [totalRegistros]="totalRegistros" [lancamentos]="lancamentos" (evento)="aoMudarPagina($event)"></app-lancamento-grid>
     </div>
 
     <div class="p-col-12">
-      <button pButton type="submit" label="Novo Lançamento"></button>
+      <a pButton label="Novo Lançamento"></a>
     </div>
 
   </div>
 
 </div>
-<!-- <h1>{{ nome | uppercase }}</h1>
-  <h1>{{ dataAniversario | date:'dd/MM/yyyy'}}</h1>
-  <h1>{{ preco | number:'1.2-2' }}</h1>
-  <h1>{{ troco | currency:'BRL':true:'1.2-2' }}</h1> -->

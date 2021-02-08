@@ -14,15 +14,16 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 
-import { LancamentosGridComponent } from './lancamentos-grid/lancamentos-grid.component';
 import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-cadastro.component';
 import { LancamentosPesquisaComponent } from './lancamentos-pesquisa/lancamentos-pesquisa.component';
+import { LancamentosGridComponent } from './lancamento-grid/lancamento-grid.component';
 
 
 @NgModule({
   declarations: [LancamentosPesquisaComponent,
     LancamentoCadastroComponent,
     LancamentosGridComponent
+
   ],
   imports: [
     CommonModule,
