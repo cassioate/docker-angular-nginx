@@ -20,7 +20,7 @@ export class LancamentoService {
   pesquisar(filtro: LancamentoFiltro): Promise<any> {
 
     const headers = new HttpHeaders()
-      .append('Authorization', 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYxMjc4MDc0MX0.rNose7V5HqiFX8j9KHOf73-n_SriOnqJKYZ82JE_aJ5h0aVD2583rxrfa4P7WV3wD8ybmOLKGkpxWNi-6M4xRg');
+      .append('Authorization', 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYxMjc4NjUzNn0.6YEKMh2LrzmdfLeCSIMl_lpG2YqwnIKuLagnVXTrPD3m1Yvth8mGXigjDXMdRBa3tpaQ8oj7-zSrB4LYAU34XQ');
 
     let params = new HttpParams()
       .set('page', filtro.pagina.toString())
