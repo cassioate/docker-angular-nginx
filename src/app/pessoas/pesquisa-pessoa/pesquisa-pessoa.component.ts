@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { LazyLoadEvent } from 'primeng/api';
+import { ConfirmationService, LazyLoadEvent, MessageService } from 'primeng/api';
+import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 import { PessoaFiltro, PessoaService } from '../pessoa.service';
 
 @Component({
@@ -13,7 +14,12 @@ export class PesquisaPessoaComponent {
   filtro = new PessoaFiltro();
   pessoas = [];
 
-  constructor(private service: PessoaService) { }
+  constructor(
+    private service: PessoaService,
+    private messageService: MessageService,
+    private confirmar: ConfirmationService,
+    private errorHandler: ErrorHandlerService
+  ) { }
 
   pesquisar(pagina = 0) {
     this.filtro.pagina = pagina;
@@ -22,7 +28,8 @@ export class PesquisaPessoaComponent {
         console.log(resultado);
         this.totalRegistros = resultado.total;
         this.pessoas = resultado.pessoas;
-      });
+      })
+      .catch(erro => this.errorHandler.handle(erro));
   }
 
   aoMudarPagina(event: LazyLoadEvent) {
@@ -30,4 +37,35 @@ export class PesquisaPessoaComponent {
     this.pesquisar(pagina);
   }
 
+  confirmarExclusao(lancamento: any) {
+    this.confirmar.confirm({
+      message: 'Tem certeza que deseja excluir?',
+      accept: () => {
+        this.aoExcluir(lancamento);
+      }
+    });
+  }
+
+  aoExcluir(pessoaComTabela: any) {
+    this.service.excluir(pessoaComTabela[0].codigo)
+      .then(() => {
+        pessoaComTabela[1].reset(),
+          this.messageService.add({ severity: 'success', detail: 'Pessoa excluída com sucesso!' });
+      })
+      .catch(erro => this.errorHandler.handle(erro));
+  }
+
+  aoAtualizarStatus(pessoa: any){
+    const novoStatus = !pessoa.ativo;
+
+    this.service.atualizarStatus(pessoa.codigo, novoStatus)
+    .then(() => {
+      const acao = novoStatus ? 'ativada' : 'desativada';
+
+      pessoa.ativo = novoStatus;
+      this.messageService.add({ severity: 'success', detail: `Pessoa ${acao} com sucesso!` });
+    })
+    .catch(erro => this.errorHandler.handle(erro));
+
+  }
 }

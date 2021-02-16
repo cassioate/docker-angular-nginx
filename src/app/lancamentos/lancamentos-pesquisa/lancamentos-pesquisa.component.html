@@ -32,7 +32,8 @@
 
   <div class="p-grid">
     <div class="p-col-12">
-      <app-lancamento-grid [filtro]="filtro" [totalRegistros]="totalRegistros" [lancamentos]="lancamentos" (evento)="aoMudarPagina($event)"></app-lancamento-grid>
+      <app-lancamento-grid [filtro]="filtro" [totalRegistros]="totalRegistros" [lancamentos]="lancamentos"
+      (eventoMudarPagina)="aoMudarPagina($event)" (eventoExcluir)="confirmarExclusao($event)"></app-lancamento-grid>
     </div>
 
     <div class="p-col-12">

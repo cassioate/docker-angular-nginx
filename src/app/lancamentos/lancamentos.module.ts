@@ -20,10 +20,10 @@ import { LancamentosGridComponent } from './lancamento-grid/lancamento-grid.comp
 
 
 @NgModule({
-  declarations: [LancamentosPesquisaComponent,
+  declarations: [
+    LancamentosPesquisaComponent,
     LancamentoCadastroComponent,
     LancamentosGridComponent
-
   ],
   imports: [
     CommonModule,

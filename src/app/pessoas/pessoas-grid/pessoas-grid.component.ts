@@ -1,5 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { LazyLoadEvent } from 'primeng/api';
+import { Table } from 'primeng/table';
 import { PessoaFiltro } from '../pessoa.service';
 
 @Component({
@@ -9,14 +10,26 @@ import { PessoaFiltro } from '../pessoa.service';
 })
 export class PessoasGridComponent {
 
- @Input() pessoas = [];
- @Input() filtro = new PessoaFiltro();
- @Input() totalRegistros = 0;
+  @Input() pessoas = [];
+  @Input() filtro = new PessoaFiltro();
+  @Input() totalRegistros = 0;
 
- @Output() evento = new EventEmitter();
+  @ViewChild('tabela') grid: Table;
 
- mudarPagina(event: LazyLoadEvent) {
-   this.evento.emit(event);
- }
+  @Output() eventoMudarPagina = new EventEmitter();
+  @Output() eventoExcluir = new EventEmitter();
+  @Output() eventoAtualizarStatus = new EventEmitter();
+
+  mudarPagina(event: LazyLoadEvent) {
+    this.eventoMudarPagina.emit(event);
+  }
+
+  excluirEvento(pessoa: any) {
+    this.eventoExcluir.emit([pessoa, this.grid]);
+  }
+
+  atualiarStatusEvento(pessoa: any){
+    this.eventoAtualizarStatus.emit(pessoa);
+  }
 
 }

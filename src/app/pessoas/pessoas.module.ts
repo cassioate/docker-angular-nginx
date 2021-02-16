@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
 import { InputMaskModule } from 'primeng/inputmask';
 import { TooltipModule } from 'primeng/tooltip';
 import { ButtonModule } from 'primeng/button';
@@ -22,6 +24,9 @@ import { PessoasGridComponent } from './pessoas-grid/pessoas-grid.component';
   imports: [
     CommonModule,
     FormsModule,
+
+    MessagesModule,
+    MessageModule,
 
     InputTextModule,
     ButtonModule,

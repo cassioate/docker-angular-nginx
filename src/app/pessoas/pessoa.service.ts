@@ -1,3 +1,4 @@
+import { Pessoa } from './../core/model';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
@@ -14,10 +15,20 @@ export class PessoaService {
 
   constructor(private http: HttpClient) { }
 
+  listarTodas(): Promise<any> {
+    const headers = new HttpHeaders()
+      .append('Authorization', 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6NjAwMDE2MTI5MDQ5ODl9.4UoIi83C2l5nMKPIgbmJZ8Fw1SdtJ0NCGMzK4xaglu-dN453hoeEnedC9Lj3JhDuvvT4nCWV0hLy6-mhtyLMOA');
+
+    return this.http.get(this.pessoasUrl, { headers })
+      .toPromise()
+      .then(
+        response => response['content']);
+  }
+
   pesquisar(filtro: PessoaFiltro): Promise<any> {
 
     const headers = new HttpHeaders()
-      .append('Authorization', 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYxMjc4NjUzNn0.6YEKMh2LrzmdfLeCSIMl_lpG2YqwnIKuLagnVXTrPD3m1Yvth8mGXigjDXMdRBa3tpaQ8oj7-zSrB4LYAU34XQ');
+      .append('Authorization', 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6NjAwMDE2MTI4Mjg1MjB9.W5jTH52OruaABJ6I4uDmGwP9mPrtAXuXAR4n8SY6FSZnR3b4EXrpI9x6wUQ1m0DRxJ0KqmpIP_Xgx45CcxwmYQ');
 
     let params = new HttpParams()
       .set('page', filtro.pagina.toString())
@@ -41,4 +52,31 @@ export class PessoaService {
         return resultado;
       });
   }
+
+  atualizarStatus(codigo: number, ativo: boolean) {
+    const headers = new HttpHeaders()
+      .append('Authorization', 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6NjAwMDE2MTI4Mjg1MjB9.W5jTH52OruaABJ6I4uDmGwP9mPrtAXuXAR4n8SY6FSZnR3b4EXrpI9x6wUQ1m0DRxJ0KqmpIP_Xgx45CcxwmYQ')
+      .append('Content-Type', 'application/json');
+
+    return this.http.put(`${this.pessoasUrl}/${codigo}/ativo`, ativo, { headers })
+      .toPromise().then(() => null);
+  }
+
+  excluir(codigo: number): Promise<void> {
+    const headers = new HttpHeaders()
+      .append('Authorization', 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6NjAwMDE2MTI4Mjg1MjB9.W5jTH52OruaABJ6I4uDmGwP9mPrtAXuXAR4n8SY6FSZnR3b4EXrpI9x6wUQ1m0DRxJ0KqmpIP_Xgx45CcxwmYQ')
+
+    return this.http.delete(`${this.pessoasUrl}/${codigo}`, { headers })
+      .toPromise().then(() => null);
+  }
+
+  salvar(pessoa: Pessoa): Promise<Pessoa> {
+    const headers = new HttpHeaders()
+      .append('Authorization', 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6NjAwMDE2MTI4Mjg1MjB9.W5jTH52OruaABJ6I4uDmGwP9mPrtAXuXAR4n8SY6FSZnR3b4EXrpI9x6wUQ1m0DRxJ0KqmpIP_Xgx45CcxwmYQ')
+      .append('Content-Type', 'application/json');
+
+    return this.http.post<Pessoa>(`${this.pessoasUrl}`, pessoa, { headers })
+    .toPromise();
+  }
+
 }

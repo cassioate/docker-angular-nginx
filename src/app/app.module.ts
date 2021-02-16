@@ -1,15 +1,14 @@
-import { PessoaService } from './pessoas/pessoa.service';
-import { LancamentoService } from './lancamentos/lancamento.service';
+import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { LancamentosModule } from './lancamentos/lancamentos.module';
 import { PessoasModule } from './pessoas/pessoas.module';
+
 import { NgModule } from '@angular/core';
+
 import { BrowserModule } from '@angular/platform-browser';
-
-import { AppComponent } from './app.component';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -24,10 +23,7 @@ import { HttpClientModule } from '@angular/common/http';
     LancamentosModule,
     PessoasModule
   ],
-  providers: [
-    LancamentoService,
-    PessoaService
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

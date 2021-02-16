@@ -1,6 +1,6 @@
 <div class="container">
 
-  <form>
+  <form #form="ngForm" (ngSubmit)="salvar(form)">
 
     <div class="p-grid">
       <div class="p-col-12">
@@ -9,26 +9,28 @@
 
       <div class="p-col-12">
         <div></div>
-        <p-selectButton [options]="tipos" #tipo></p-selectButton>
+        <p-selectButton name="tipo" #tipo [options]="tipos" [(ngModel)]="lancamento.tipo"></p-selectButton>
       </div>
 
       <div class="p-fluid p-col-6 p-md-3">
         <label>Vencimento</label>
         <p-calendar styleClass="form-control" dateFormat="dd/mm/yy" [showIcon]="true"
-        [readonlyInput]="false" name="vencimento" ngModel #vencimento="ngModel" required>
+        [readonlyInput]="false" name="vencimento" #vencimento="ngModel" [(ngModel)]="lancamento.dataVencimento" required>
         </p-calendar>
         <app-message [control]="vencimento" error="required" text="Informe uma data de vencimento"></app-message>
       </div>
 
       <div class="p-fluid p-col-6 p-md-3">
         <label>{{ tipo.value === 'RECEITA' ? 'Recebimento' : 'Pagamento' }}</label>
-        <p-calendar styleClass="form-control" dateFormat="dd/mm/yy" [showIcon]="true" [readonlyInput]="true">
+        <p-calendar name="tipo" styleClass="form-control" dateFormat="dd/mm/yy"
+        [showIcon]="true" [readonlyInput]="true" [(ngModel)]="lancamento.dataPagamento" >
         </p-calendar>
       </div>
 
       <div class="p-fluid p-col-12 p-md-9">
         <label>Descrição</label>
-        <input pInputText type="text" name="descricao" ngModel #descricao="ngModel" required minlength="5">
+        <input pInputText type="text" name="descricao"
+        #descricao="ngModel" required minlength="5" [(ngModel)]="lancamento.descricao" >
         <app-message [control]="descricao" error="required" text="Informe uma descrição"></app-message>
         <app-message [control]="descricao" error="minlength" text="Minimo de {{descricao.errors?.minlength?.requiredLength}} caracteres e
         você digitou até o momento {{descricao.errors?.minlength?.actualLength}} caracteres"></app-message>
@@ -38,32 +40,32 @@
       <div class="p-fluid p-col-12 p-md-3">
         <label>Valor</label>
         <p-inputNumber [showButtons]="true" buttonLayout="stacked" mode="currency" currency="BRL"
-        name="valor" ngModel #valor="ngModel" required></p-inputNumber>
+        name="valor" ngModel #valor="ngModel" required [(ngModel)]="lancamento.valor" ></p-inputNumber>
         <app-message [control]="valor" error="required" text="Informe um valor"></app-message>
       </div>
 
       <div class="p-fluid p-col-12 p-md-6">
         <label>Categoria</label>
         <p-dropdown [options]="categorias" placeholder="Selecione"
-        name="categoria" ngModel #categoria="ngModel" required></p-dropdown>
+        name="categoria" #categoria="ngModel" required [(ngModel)]="lancamento.categoria.codigo" ></p-dropdown>
         <app-message [control]="categoria" error="required" text="Informe uma categoria"></app-message>
       </div>
 
       <div class="p-fluid p-col-12 p-md-6">
         <label>Pessoa</label>
         <p-dropdown [options]="pessoas" [filter]="true" placeholder="Selecione"
-        name="pessoa" ngModel #pessoa="ngModel" required></p-dropdown>
+        name="pessoa" #pessoa="ngModel" required [(ngModel)]="lancamento.pessoa.codigo" ></p-dropdown>
         <app-message [control]="pessoa" error="required" text="Informe uma pessoa"></app-message>
       </div>
 
       <div class="p-col-12 p-fluid">
         <label>Observação</label>
-        <textarea pInputTextarea rows="3"></textarea>
+        <textarea pInputTextarea rows="3" name="observacao" [(ngModel)]="lancamento.observacao"></textarea>
       </div>
 
       <div class="p-col-12">
         <button pButton type="submit" label="Salvar" class="p-button"></button>
-        <button pButton type="submit" label="Novo" class="p-button-warning"></button>
+        <button pButton type="button" label="Novo" class="p-button-warning"></button>
         <a href="javascript:;">Voltar para a pesquisa</a>
       </div>
 
