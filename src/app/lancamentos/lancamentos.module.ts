@@ -17,6 +17,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-cadastro.component';
 import { LancamentosPesquisaComponent } from './lancamentos-pesquisa/lancamentos-pesquisa.component';
 import { LancamentosGridComponent } from './lancamento-grid/lancamento-grid.component';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -26,6 +27,8 @@ import { LancamentosGridComponent } from './lancamento-grid/lancamento-grid.comp
     LancamentosGridComponent
   ],
   imports: [
+    RouterModule,
+
     CommonModule,
     FormsModule,
 

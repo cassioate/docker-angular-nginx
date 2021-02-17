@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { FormControl } from '@angular/forms';
 import { Lancamento, Categoria } from './../../core/model';
@@ -28,12 +29,31 @@ export class LancamentoCadastroComponent implements OnInit {
     private errorHandler: ErrorHandlerService,
     private pessoaService: PessoaService,
     private lancamentoService: LancamentoService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private rotaAtiva: ActivatedRoute
   ) { }
 
   ngOnInit() {
+    const codigoLancamento = this.rotaAtiva.snapshot.params.codigo;
+
+    if (codigoLancamento) {
+      this.carregarLancamento(codigoLancamento);
+    }
+
     this.carregarCategorias();
     this.carregarPessoas();
+  }
+
+  get editando() {
+    return Boolean(this.lancamento.codigo);
+  }
+
+  carregarLancamento(codigo: number){
+    this.lancamentoService.pesquisarPorId(codigo)
+    .then(lanc => {
+      this.lancamento = lanc;
+    })
+    .catch(erro => this.errorHandler.handle(erro));
   }
 
   carregarPessoas() {

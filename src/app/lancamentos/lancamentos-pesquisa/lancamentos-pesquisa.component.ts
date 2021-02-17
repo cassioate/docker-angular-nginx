@@ -1,5 +1,5 @@
 import { ErrorHandlerService } from './../../core/error-handler.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ConfirmationService, LazyLoadEvent, MessageService } from 'primeng/api';
 import { LancamentoService, LancamentoFiltro } from './../lancamento.service';
 
@@ -19,7 +19,7 @@ export class LancamentosPesquisaComponent {
     private messageService: MessageService,
     private confirmar: ConfirmationService,
     private errorHandler: ErrorHandlerService
-    ) { }
+  ) { }
 
   pesquisar(pagina = 0) {
     this.filtro.pagina = pagina;
@@ -50,7 +50,7 @@ export class LancamentosPesquisaComponent {
     this.service.excluir(lancamentoComTabela[0].codigo)
       .then(() => {
         lancamentoComTabela[1].reset(),
-        this.messageService.add({ severity: 'success', detail: 'Lançamento excluído com sucesso!' });
+          this.messageService.add({ severity: 'success', detail: 'Lançamento excluído com sucesso!' });
       })
       .catch(erro => this.errorHandler.handle(erro));
   }

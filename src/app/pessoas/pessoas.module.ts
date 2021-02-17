@@ -14,6 +14,7 @@ import { TableModule } from 'primeng/table';
 import { PesquisaPessoaComponent } from './pesquisa-pessoa/pesquisa-pessoa.component';
 import { CadastroPessoaComponent } from './cadastro-pessoa/cadastro-pessoa.component';
 import { PessoasGridComponent } from './pessoas-grid/pessoas-grid.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,8 @@ import { PessoasGridComponent } from './pessoas-grid/pessoas-grid.component';
   PessoasGridComponent
   ],
   imports: [
+    RouterModule,
+
     CommonModule,
     FormsModule,
 

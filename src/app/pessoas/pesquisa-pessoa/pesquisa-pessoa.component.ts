@@ -25,7 +25,6 @@ export class PesquisaPessoaComponent {
     this.filtro.pagina = pagina;
     this.service.pesquisar(this.filtro)
       .then(resultado => {
-        console.log(resultado);
         this.totalRegistros = resultado.total;
         this.pessoas = resultado.pessoas;
       })

@@ -1,7 +1,8 @@
 <div class="container">
-  <div class="p-grid">
 
-    <form autocomplete="off" (ngSubmit)="pesquisar()">
+  <form autocomplete="off" (ngSubmit)="pesquisar()">
+
+    <div class="p-grid">
 
       <div class="p-col-12">
         <h1>Lançamentos</h1>
@@ -9,35 +10,37 @@
 
       <div class="p-col-12 p-fluid">
         <label>Descrição</label>
-        <input pInputText type="text" name="descricao"
-          [(ngModel)]="filtro.descricao">
+        <input pInputText type="text" name="descricao" [(ngModel)]="filtro.descricao">
       </div>
+
 
       <div class="p-col-12">
         <label style="display: block">Vencimento</label>
-        <p-calendar dateFormat="dd/mm/yy" [inputStyle]="{ width: '95px' }"
-          name="vencimentoInicio" [(ngModel)]="filtro.dataVencimentoInicio"></p-calendar>
+        <p-calendar dateFormat="dd/mm/yy" [inputStyle]="{ width: '95px' }" name="vencimentoInicio"
+          [(ngModel)]="filtro.dataVencimentoInicio"></p-calendar>
 
         <label>até</label>
-        <p-calendar dateFormat="dd/mm/yy" [inputStyle]="{ width: '95px' }"
-          name="vencimentoFim" [(ngModel)]="filtro.dataVencimentoFim"></p-calendar>
+        <p-calendar dateFormat="dd/mm/yy" [inputStyle]="{ width: '95px' }" name="vencimentoFim"
+          [(ngModel)]="filtro.dataVencimentoFim"></p-calendar>
       </div>
 
       <div class="p-col-12">
         <button pButton type="submit" label="Pesquisar"></button>
       </div>
 
-    </form>
-  </div>
+    </div>
+
+  </form>
+
 
   <div class="p-grid">
     <div class="p-col-12">
       <app-lancamento-grid [filtro]="filtro" [totalRegistros]="totalRegistros" [lancamentos]="lancamentos"
-      (eventoMudarPagina)="aoMudarPagina($event)" (eventoExcluir)="confirmarExclusao($event)"></app-lancamento-grid>
+        (eventoMudarPagina)="aoMudarPagina($event)" (eventoExcluir)="confirmarExclusao($event)"></app-lancamento-grid>
     </div>
 
     <div class="p-col-12">
-      <a pButton label="Novo Lançamento"></a>
+      <a routerLink="/lancamentos/cadastro" pButton label="Novo Lançamento"></a>
     </div>
 
   </div>
