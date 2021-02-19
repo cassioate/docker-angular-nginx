@@ -1,3 +1,4 @@
+import { element } from 'protractor';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MessageService } from 'primeng/api';
@@ -18,9 +19,14 @@ export class ErrorHandlerService {
       && errorResponse.status >= 400 && errorResponse.status <= 499) {
 
       try {
-        errorResponse.error.forEach(element => {
-          msg.push(element.mensagemUsuario);
-        });
+        if (errorResponse.status === 403) {
+          msg.push(errorResponse.error.message);
+        } else {
+          errorResponse.error.forEach(element => {
+            msg.push(element.mensagemUsuario);
+          });
+        }
+
       } catch (e) { }
 
       console.error('Ocorreu um erro', errorResponse);

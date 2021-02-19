@@ -1,10 +1,10 @@
 <div class="container">
 
-  <form #form="ngForm" (ngSubmit)="salvarPessoa(form)">
+  <form #form="ngForm" (ngSubmit)="salvar(form)">
 
     <div class="p-grid">
       <div class="p-col-12">
-        <h1>Nova Pessoa</h1>
+        <h1>{{ editando ? 'Editando' : 'Novo' }} Pessoa</h1>
       </div>
 
       <div class="p-fluid p-col-12">
@@ -58,7 +58,7 @@
 
       <div class="p-col-12">
         <button pButton type="submit" label="Salvar" class="p-button"></button>
-        <button pButton type="button" label="Novo" class="p-button-warning"></button>
+        <button (click)="novo(form)" pButton type="button" label="Novo" class="p-button-warning"></button>
         <a routerLink="/pessoas">Voltar para a pesquisa</a>
       </div>
 

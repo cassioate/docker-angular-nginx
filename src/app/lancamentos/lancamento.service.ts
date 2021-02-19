@@ -78,7 +78,6 @@ export class LancamentoService {
     return this.http.get<Lancamento>(`${this.lancamentosUrl}/${codigo}`, { headers })
       .toPromise()
       .then(response => {
-        console.log(response);
         const lancamento = response;
 
         this.converterStringsParaDatas([lancamento]);
@@ -89,7 +88,7 @@ export class LancamentoService {
 
   atualizar(lancamento: Lancamento): Promise<Lancamento> {
     const headers = new HttpHeaders()
-      .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==')
+      .append('Authorization', 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6NjAwMDE2MTI4Mjg1MjB9.W5jTH52OruaABJ6I4uDmGwP9mPrtAXuXAR4n8SY6FSZnR3b4EXrpI9x6wUQ1m0DRxJ0KqmpIP_Xgx45CcxwmYQ')
       .append('Content-Type', 'application/json');
 
     return this.http.put<Lancamento>(`${this.lancamentosUrl}/${lancamento.codigo}`, lancamento, { headers })

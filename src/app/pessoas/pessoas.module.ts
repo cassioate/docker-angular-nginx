@@ -1,3 +1,4 @@
+import { PessoasRoutingModule } from './pessoas-routing.module';
 import { SharedModule } from './../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -37,11 +38,9 @@ import { RouterModule } from '@angular/router';
     TooltipModule,
     InputMaskModule,
 
-    SharedModule
+    SharedModule,
+    PessoasRoutingModule
   ],
-  exports: [
-    PesquisaPessoaComponent,
-    CadastroPessoaComponent
-  ]
+  exports: []
 })
 export class PessoasModule { }

@@ -1,3 +1,5 @@
+import { RouterModule } from '@angular/router';
+import { LancamentosRoutingModule } from './lancamentos-routing.module';
 import { SharedModule } from './../shared/shared.module';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { FormsModule } from '@angular/forms';
@@ -17,7 +19,6 @@ import { InputTextModule } from 'primeng/inputtext';
 import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-cadastro.component';
 import { LancamentosPesquisaComponent } from './lancamentos-pesquisa/lancamentos-pesquisa.component';
 import { LancamentosGridComponent } from './lancamento-grid/lancamento-grid.component';
-import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -27,8 +28,6 @@ import { RouterModule } from '@angular/router';
     LancamentosGridComponent
   ],
   imports: [
-    RouterModule,
-
     CommonModule,
     FormsModule,
 
@@ -43,11 +42,9 @@ import { RouterModule } from '@angular/router';
     InputNumberModule,
     InputMaskModule,
 
-    SharedModule
+    SharedModule,
+    LancamentosRoutingModule
   ],
-  exports: [
-    LancamentoCadastroComponent,
-    LancamentosPesquisaComponent
-  ]
+  exports: []
 })
 export class LancamentosModule { }

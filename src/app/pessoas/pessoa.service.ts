@@ -53,13 +53,32 @@ export class PessoaService {
       });
   }
 
+  pesquisarPorId(codigo: number): Promise<any> {
+    const headers = new HttpHeaders()
+      .append('Authorization', 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6NjAwMDE2MTI4Mjg1MjB9.W5jTH52OruaABJ6I4uDmGwP9mPrtAXuXAR4n8SY6FSZnR3b4EXrpI9x6wUQ1m0DRxJ0KqmpIP_Xgx45CcxwmYQ');
+
+    const resultado = this.http.get<Pessoa>(`${this.pessoasUrl}/${codigo}`, { headers })
+      .toPromise()
+      .then(response => {
+        const pessoa = response;
+        return pessoa;
+      });
+
+    console.log(resultado);
+    return resultado;
+  }
+
   atualizarStatus(codigo: number, ativo: boolean) {
     const headers = new HttpHeaders()
       .append('Authorization', 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6NjAwMDE2MTI4Mjg1MjB9.W5jTH52OruaABJ6I4uDmGwP9mPrtAXuXAR4n8SY6FSZnR3b4EXrpI9x6wUQ1m0DRxJ0KqmpIP_Xgx45CcxwmYQ')
       .append('Content-Type', 'application/json');
 
     return this.http.put(`${this.pessoasUrl}/${codigo}/ativo`, ativo, { headers })
-      .toPromise().then(() => null);
+      .toPromise()
+      .then(response => {
+        const pessoa = response;
+        return pessoa;
+      });
   }
 
   excluir(codigo: number): Promise<void> {
@@ -76,7 +95,19 @@ export class PessoaService {
       .append('Content-Type', 'application/json');
 
     return this.http.post<Pessoa>(`${this.pessoasUrl}`, pessoa, { headers })
-    .toPromise();
+      .toPromise();
   }
 
-}
+  atualizar(pessoa: Pessoa): Promise<Pessoa> {
+    const headers = new HttpHeaders()
+      .append('Authorization', 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6NjAwMDE2MTI4Mjg1MjB9.W5jTH52OruaABJ6I4uDmGwP9mPrtAXuXAR4n8SY6FSZnR3b4EXrpI9x6wUQ1m0DRxJ0KqmpIP_Xgx45CcxwmYQ')
+      .append('Content-Type', 'application/json');
+
+    return this.http.put<Pessoa>(`${this.pessoasUrl}/${pessoa.codigo}`, pessoa, { headers })
+      .toPromise()
+      .then(response => {
+        const pessoa = response;
+        return pessoa;
+      });
+    }
+  }
