@@ -1,4 +1,3 @@
-import { RouterModule } from '@angular/router';
 import { LancamentosRoutingModule } from './lancamentos-routing.module';
 import { SharedModule } from './../shared/shared.module';
 import { InputNumberModule } from 'primeng/inputnumber';
